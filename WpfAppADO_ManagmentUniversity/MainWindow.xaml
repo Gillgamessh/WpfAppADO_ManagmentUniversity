@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfAppADO_ManagmentUniversity.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppADO_ManagmentUniversity"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <GroupBox Header="Student Form" Margin="10">
+                <Grid Height="150">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name" HorizontalAlignment="Left" 
+				   VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox  Grid.Row="0" Grid.Column="1" x:Name="TextBoxName" Height="27" 
+				   Margin="5"  Width="300" HorizontalAlignment="Left"/>
+                    <Label Content="Mark" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
+				   Grid.Row="1" Grid.Column="0" />
+                    <TextBox  Grid.Row="1" Grid.Column="1" x:Name="TextBoxMark" Height="27" 
+				   Margin="5" Width="50" HorizontalAlignment="Left"/>
+                    <Label Content="Group" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
+				   Grid.Row="2" Grid.Column="0" />
+                    <ComboBox SelectionChanged="BoxGroup_SelectionChanged" ItemsSource="{Binding}" SelectedValuePath="Id" Grid.Row="2" Grid.Column="1" x:Name="BoxGroup" Height="27"
+				   Margin="5" Width="300" HorizontalAlignment="Left"/>
+                    <Label Content="Gontact" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
+				   Grid.Row="3" Grid.Column="0" />
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="TextBoxContact" Height="27"
+				   Margin="5" Width="300" HorizontalAlignment="Left"/>
+                </Grid>
+            </GroupBox>
+            <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
+                <!--<Button x:Name="ButtonSort" Content="Sort Group" Height="30" Width="80" Click="ButtonSort_OnClick"/>-->
+                <Button x:Name="ButtonAdd" Content="Add" Height="30" Width="80" Click="InsertOrUpdateStudent"/>
+                <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" Margin="5,0,10,0" Click="ButtonCancel_Click"/>
+            </StackPanel>
+            <DataGrid x:Name="studentDataGrid" x:Uid="employeeDataGrid" SelectionMode="Single" Height="123" MaxHeight="120"  HorizontalAlignment="Left" Margin="230,10,50,214" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.ColumnSpan="2" Width="184">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" x:Name="id" IsReadOnly="True" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" x:Name="name" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Marks}" Header="Marks" x:Name="city" Width="Auto"></DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Edit">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button Content="Edit" Click="Edit_Click" CommandParameter="{Binding id}"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button Content="Delete" Click="Delete_Click" ></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+</Window>
